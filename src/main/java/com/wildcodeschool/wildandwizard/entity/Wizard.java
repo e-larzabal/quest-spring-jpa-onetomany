@@ -1,10 +1,8 @@
 package com.wildcodeschool.wildandwizard.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 public class Wizard {
@@ -18,6 +16,25 @@ public class Wizard {
     private String birthPlace;
     private String biography;
     private boolean muggle;
+
+
+
+    // TODO : Modifier l'entité Wizard afin d'y ajouter le code nécessaire
+    //  à la création de sa relation avec une école : School school
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = true)
+    @JoinColumn(name="school_id", nullable=true)
+    private School school;
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+
+
 
     public Wizard() {
     }
@@ -77,4 +94,5 @@ public class Wizard {
     public void setMuggle(boolean muggle) {
         this.muggle = muggle;
     }
+
 }
